@@ -101,6 +101,14 @@ const Semaine = (props) => {
             </div>
         )
 
+    }else{
+       return(
+        <div>
+            <p>
+                rien saisi depuis 1 semaine
+            </p>
+        </div>
+       )
     }
   
 };

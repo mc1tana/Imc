@@ -24,13 +24,14 @@ class Connexion extends Component {
         }
         
         post("Connexion", this.state.user).then((res) => {
-            const response = res.data;
-           
+            const response = res.data;      
             if (response != null && response.error == false) {
                 console.log(response.u)
                 this.props.navigate('/Main',{user:response.u})
+            }else{
+                console.log({1:response.msg})
+                this.state.erreur=response.u
             }
-            console.log(response);
           });
     }
     render() {

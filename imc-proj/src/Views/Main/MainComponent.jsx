@@ -23,13 +23,8 @@ const Main = (props) => {
         
         post("ImcLast",{mail:location.state.mail}).then((res) => {
             const response = res.data;
-              console.log(response)
-              console.log("lmklsqd")
-            if (response != null && response.error == false) {
-                
-               
-                SetImc(response.lastImc);
-                          
+            if (response != null && response.error == false) {   
+                SetImc(response.lastImc);               
             }
 
           }).catch(err => {
@@ -43,7 +38,7 @@ if(Periode=="Semaine"){
     return (
         <div>
             
-            <MenuComponent nomUser={location.state.nom} Periode={Periode} changep={setPeriode} nav={navigate} imc={Imc}/>
+            <MenuComponent nomUser={location.state.nom} Periode={Periode} changep={setPeriode} nav={navigate} imc={Imc} />
             <Semaine userMail={location.state.mail}/>
         </div>
     );}else if(Periode=='SaisiPoid'){
@@ -51,14 +46,23 @@ if(Periode=="Semaine"){
             <div>
                 
                 <MenuComponent nomUser={location.state.nom} Periode={Periode} changep={setPeriode} nav={navigate} imc={Imc}/>
-               <SaisiImc userMail={location.state.mail} userTaille={location.state.taille} changep={setPeriode}/>
+               <SaisiImc userMail={location.state.mail} userTaille={location.state.taille} changep={setPeriode} setImc={SetImc}/>
             </div>)
     }else if(Periode=='Mois'){
         return (
             <div>
                 
                 <MenuComponent nomUser={location.state.nom} Periode={Periode} changep={setPeriode} nav={navigate} imc={Imc}/>
-               <Mois userMail={location.state.mail} userTaille={location.state.taille}/>
+               <Mois userMail={location.state.mail} userTaille={location.state.taille} periode="ImcMois"/>
+               
+            </div>)
+    }
+    else if(Periode=='Annee'){
+        return (
+            <div>
+                
+                <MenuComponent nomUser={location.state.nom} Periode={Periode} changep={setPeriode} nav={navigate} imc={Imc}/>
+               <Mois userMail={location.state.mail} userTaille={location.state.taille} periode="ImcAnnee"/>
                
             </div>)
     }

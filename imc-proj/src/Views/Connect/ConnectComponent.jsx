@@ -7,22 +7,19 @@ const Connect = (props) => {
     var[InitLoad,setInitLoad]=useState(true);
     const [Pass,setPass]=useState('');
     const [Mail,setMail]=useState('');
+    const [Error,setError]=useState('');
     const [User,setUser]=useState({});
     const navigate=useNavigate();
    
    function Connection(e){
-        e.preventDefault ()
-        
-      
-        
+        e.preventDefault ()    
         post("Connexion", User).then((res) => {
             const response = res.data;
-           
             if (response != null && response.error == false) {
-                console.log(response.u)
                navigate('/Main',{ state: response.u})
+            }else{
+                setError(response.msg)
             }
-            console.log(response);
           });
     }
     return (
@@ -48,6 +45,7 @@ const Connect = (props) => {
           })}}/>
                 
             </div>
+            <p className='errorCo'>{Error}</p>
             <div className='divCo'>
             <button type="submit" class="btn btn-primary btnConnexion">Submit</button>
             <Link to="/inscription" className='linkto'>Inscription</Link>

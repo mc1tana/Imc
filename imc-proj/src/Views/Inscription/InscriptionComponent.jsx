@@ -13,7 +13,8 @@ class Inscription extends Component {
             Mail:'',
             Pass:'',
             Weight:'',
-            Height:''
+            Height:'',
+            inscription:''
         }
     }
 
@@ -27,13 +28,16 @@ class Inscription extends Component {
             "poid":this.state.Weight,
             "taille":this.state.Height
         }
-        console.log(this.state.user)
+        // console.log(this.state.user)
         post("creationUser", this.state.user).then((res) => {
             const response = res.data;
-            if (response != null) {
-              
+            if (response != null && response.ok) {
+              this.state.inscription="inscription Reussi";
+              window.location.href="/connect"
+            }else{
+                this.state.inscription=response.msg.message
             }
-            console.log(response);
+            console.log({1:this.state.inscription});
           });
     }
   
@@ -63,12 +67,13 @@ class Inscription extends Component {
                     </div>
                     <div class="mb-3 d-flex w-100">
                         <label for="Height" class="form-label w-25 me-2 text-end">Taille :</label>
-                        <input type="number" class="form-control controlNum" id="Height" onChange={(e)=>{this.state.Height=e.target.value}} />
+                        <input type="number" class="form-control controlNum" id="Height" onChange={(e)=>{this.state.Height=e.target.value}} placeholder=' cm'/>
                     </div>
                     <div class="mb-3 d-flex w-100">
                         <label for="Weight" class="form-label w-25 me-2 text-end">Poid :</label>
-                        <input type="number" class="form-control controlNum" id="Weight" onChange={(e)=>{this.state.Weight=e.target.value}} />  
+                        <input type="number" class="form-control controlNum" id="Weight" onChange={(e)=>{this.state.Weight=e.target.value}} placeholder=' kg'/>  
                     </div> 
+                    <p>{this.state.inscription}</p>
                     <div className='divCo'>
                         <button type="submit" class="btn btn-primary btnInscription">Submit</button>
                         <Link to="/connect" className='linkto'>Connection</Link>

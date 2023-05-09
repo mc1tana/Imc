@@ -30,8 +30,7 @@ class Jauge extends Component {
                   greenFrom:18,
                   greenTo:25,
                   blueFrom:1,
-                  blueTo:18,
-                  
+                  blueTo:18, 
                 }}
                 rootProps={{ 'data-testid': '1' }}
               />
